@@ -55,6 +55,9 @@ setuid 65535
 stacksize 6291456 
 flush
 auth none
+
+$(awk -F "/" '{print 
+"proxy -6 -n -a -p" $4 " -e" $3}' ${WORKDATA})
 EOF
 }
 
