@@ -54,10 +54,7 @@ setgid 65535
 setuid 65535
 stacksize 6291456 
 flush
-
-
-$(awk -F "/" '{print "proxy -6 -n -a -p" $4 " -i" $3 " -e"$5"\n" \
-"flush\n"}' ${WORKDATA})
+auth none
 EOF
 }
 
