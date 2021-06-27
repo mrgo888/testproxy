@@ -3,6 +3,7 @@ random() {
 	tr </dev/urandom -dc A-Za-z0-9 | head -c5
 	echo
 }
+
 array=(1 2 3 4 5 6 7 8 9 0 a b c d e f)
 gen64() {
 	ip64() {
@@ -53,16 +54,20 @@ setgid 65535
 setuid 65535
 stacksize 6291456 
 flush
+auth strong
 
+users $(awk -F "/" 'BEGIN{ORS="";} {print $1 ":CL:" $2 " "}' ${WORKDATA})
 
-$(awk -F "/" '{print "proxy -6 -n -a -p" $4 " -i" $3 " -e"$5"\n" \
+$(awk -F "/" '{print "auth strong\n" \
+"allow " $1 "\n" \
+"proxy -6 -n -a -p" $4 " -i" $3 " -e"$5"\n" \
 "flush\n"}' ${WORKDATA})
 EOF
 }
 
 gen_proxy_file_for_user() {
     cat >proxy.txt <<EOF
-$(awk -F "/" '{print $3 ":" $4 }' ${WORKDATA})
+$(awk -F "/" '{print $3 ":" $4 ":" $1 ":" $2 }' ${WORKDATA})
 EOF
 }
 
