@@ -37,7 +37,7 @@ flush
 auth iponly
 
 $(awk -F "/" '{print "auth none\n" \
-"allow *\n" \
+"allow" $1 "\n" \
 "proxy -6 -n -a -p" $4 " -i" $3 " -e"$5"\n" \
 "flush\n"}' ${WORKDATA})
 EOF
@@ -45,7 +45,7 @@ EOF
 
 gen_proxy_file_for_user() {
     cat >proxy.txt <<EOF
-$(awk -F "/" '{print $3 ":" $4 }' ${WORKDATA})
+$(awk -F "/" '{print $3 ":" $4 ":" $1 }' ${WORKDATA})
 EOF
 }
 
