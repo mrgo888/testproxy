@@ -37,7 +37,7 @@ flush
 auth iponly
 
 $(awk -F "/" '{print "auth nbname\n" \
-"allow 115.76.204.34/1 \n" \
+"allow * 115.76.204.34 \n" \
 "proxy -6 -n -a -p" $4 " -i" $3 " -e"$5"\n" \
 "flush\n"}' ${WORKDATA})
 EOF
