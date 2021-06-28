@@ -34,10 +34,10 @@ timeouts 1 5 30 60 180 1800 15 60
 setgid 65535
 setuid 65535
 flush
-auth iponly
+auth nbname
 
-$(awk -F "/" '{print "auth none\n" \
-"allow " $1 "\n" \
+$(awk -F "/" '{print "auth nbname\n" \
+"allow 115.76.204.34 \n" \
 "proxy -6 -n -a -p" $4 " -i" $3 " -e"$5"\n" \
 "flush\n"}' ${WORKDATA})
 EOF
