@@ -35,9 +35,9 @@ setgid 65535
 setuid 65535
 flush
 auth iponly
-allow * 115.76.204.34/1
+allow 115.76.204.34
 $(awk -F "/" '{print "auth iponly\n" \
-"allow * 115.76.204.34/1 \n" \
+"allow 115.76.204.34 \n" \
 "proxy -6 -n -a -p" $4 " -i" $3 " -e"$5"\n" \
 "flush\n"}' ${WORKDATA})
 EOF
